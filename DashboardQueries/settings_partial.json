@@ -1,0 +1,80 @@
+"dashboard.server.widgets": [
+	{
+		"name": "CPU Usage",
+		"gridItemConfig": {
+			"sizex": 3,
+			"sizey": 2
+		},
+		"widget": {
+			"insights-widget": {
+				"type": {
+					"line": {
+						"dataDirection": "vertical",
+						"columnsAsLabels": true,
+						"labelFirstColumn": false,
+						"legendPosition": "top",
+						"dataType": "number"
+					}
+				},
+				"queryFile": "c:\\Dev\\ADS\\DashboardQueries\\cpu_utilization.sql"
+			}
+		}
+	},
+	{
+		"name": "Tasks",
+		"widget": {
+			"tasks-widget": [
+				"configureDashboard",
+				"newQuery",
+				"mssqlCluster.task.newNotebook"
+			]
+		},
+		"gridItemConfig": {
+			"sizex": 1,
+			"sizey": 1
+		}
+	},
+	{
+		"name": "Search",
+		"gridItemConfig": {
+			"sizex": 1,
+			"sizey": 2
+		},
+		"widget": {
+			"explorer-widget": {}
+		}
+	},
+	{
+		"name": "Backup Health",
+		"gridItemConfig": {
+			"sizex": 2,
+			"sizey": 1
+		},
+		"widget": {
+			"insights-widget": {
+				"type": {
+					"bar": {
+						"dataDirection": "vertical",
+						"columnsAsLabels": true,
+						"labelFirstColumn": true,
+						"legendPosition": "top",
+						"dataType": "number",
+						"encoding": "hex",
+						"imageFormat": "jpeg"
+					}
+				},
+				"queryFile": "C:\\Dev\\ADS\\DashboardQueries\\backups_overview.sql",
+				"details": {
+					"queryFile": "C:\\Dev\\ADS\\DashboardQueries\\backups_detail.sql",
+					"label": "DatabaseName",
+					"value": "Health"
+				}
+			}
+		}
+	},
+	{
+		"widget": {
+			"all-database-size-server-insight": null
+		}
+	}
+]
