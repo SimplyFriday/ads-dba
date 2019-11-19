@@ -16,12 +16,14 @@ AS (
                 FROM dbo.backupset bs
                 WHERE bs.[type] = 'D'
                    AND bs.database_name = db.name
-           ) AS LastFullBackup
+           ) AS LastFullBackup,
+           db.recovery_model_desc AS RecoveryModel
     FROM    sys.databases db    
     WHERE  Cast(CASE WHEN name IN ('master', 'model', 'msdb', 'tempdb') THEN 1 ELSE is_distributor END As bit) = 0), -- Exclude system databases
 health AS (
     SELECT
         CASE 
+            WHEN RecoveryModel = 'SIMPLE' THEN 'Healthy'
             WHEN LastLogBackup > 60 THEN 'Unhealthy'
             WHEN LastLogBackup IS NULL THEN 'Unhealthy'
             ELSE 'Healthy' 
