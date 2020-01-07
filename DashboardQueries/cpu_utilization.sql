@@ -43,8 +43,10 @@ BEGIN
         RETURN
     END
 
-
-    SET @includeIdle = 0
+    IF @isLinux = 1
+        SET @includeIdle = 0
+    ELSE
+        SET @includeIdle = 1
 END
 
 
